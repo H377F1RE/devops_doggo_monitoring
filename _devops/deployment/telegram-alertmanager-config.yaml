@@ -1,0 +1,40 @@
+apiVersion: monitoring.coreos.com/v1alpha1
+kind: AlertmanagerConfig
+metadata:
+  name: telegram
+  namespace: monitoring
+  labels:
+    release: monitoring
+spec:
+  route:
+    receiver: telegram
+    groupBy: ["alertname", "namespace"]
+    routes:
+      - matchers:
+          - name: alertname
+            value: Watchdog
+            matchType: "="
+        receiver: "null"
+      - matchers:
+          - name: alertname
+            value: AlertmanagerFailedToSendAlert
+            matchType: "="
+        receiver: "null"
+      - matchers:
+          - name: alertname
+            value: ServiceDown
+            matchType: "="
+        receiver: telegram
+  receivers:
+    - name: "null"
+    - name: telegram
+      telegramConfigs:
+        - botToken:
+            name: telegram-bot-token
+            key: token
+          chatID: -4845707611
+          parseMode: HTML
+          sendResolved: true
+          message: |
+            🚨 <b>Сервис не отвечает на Health-check запрос больше минуты</b>
+            <b>URL:</b> {{ .CommonLabels.instance }}

@@ -7,3 +7,4 @@ minikube start
 #helm install monitoring prometheus-community/kube-prometheus-stack -n monitoring --create-namespace
 #helm install blackbox-exporter prometheus-community/prometheus-blackbox-exporter -n monitoring
 #helm upgrade monitoring prometheus-community/kube-prometheus-stack -n monitoring -f values.yaml
+#kubectl create secret generic telegram-bot-token -n monitoring --from-literal=token=

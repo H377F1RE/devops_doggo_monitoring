@@ -5,31 +5,9 @@ prometheus:
 
 alertmanager:
   alertmanagerSpec:
+    alertmanagerConfigSelector:
+      matchLabels:
+        release: monitoring
+    alertmanagerConfigNamespaceSelector: {}
     secrets:
-      - alertmanager-telegram
-
-  config:
-    global:
-      resolve_timeout: 5m
-
-    route:
-      receiver: telegram
-      group_by: ['alertname', 'namespace']
-      group_wait: 30s
-      group_interval: 5m
-      repeat_interval: 4h
-
-    receivers:
-      - name: telegram
-        telegram_configs:
-          - bot_token: '{{ .telegram_bot_token }}'
-            chat_id: 4845707611
-            parse_mode: HTML
-            send_resolved: true
-            message: |
-              🚨 <b>{{ .CommonAnnotations.summary }}</b>
-              
-              {{ .CommonAnnotations.description }}
-
-              <b>Status:</b> {{ .Status }}
-              <b>StartsAt:</b> {{ .StartsAt }}
+      - telegram-bot-token

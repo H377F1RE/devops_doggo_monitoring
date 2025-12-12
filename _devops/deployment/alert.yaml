@@ -12,8 +12,6 @@ spec:
         - alert: ServiceDown
           expr: probe_success == 0
           for: 1m
-          labels:
-            severity: critical
           annotations:
             summary: "Сервис недоступен"
             description: "Health-check не отвечает более 1 минуты. Endpoint: {{ $labels.instance }}"
