@@ -13,5 +13,5 @@ spec:
   targets:
     staticConfig:
       static:
-        - http://doggo.default/actuator/health
-        - http://doggo-rating.default/health
+        - http://doggo.default:4000/actuator/health
+        - http://doggo-rating.default:8000/health
