@@ -3,11 +3,13 @@ kind: Probe
 metadata:
   name: doggo-health
   namespace: monitoring
+  labels:
+    release: monitoring
 spec:
   interval: 30s
   module: http_2xx
   prober:
-    url: blackbox-prometheus-blackbox-exporter.monitoring.svc:9115
+    url: blackbox-exporter-prometheus-blackbox-exporter.monitoring.svc:9115
   targets:
     staticConfig:
       static:
