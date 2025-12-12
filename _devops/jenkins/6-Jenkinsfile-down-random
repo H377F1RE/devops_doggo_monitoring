@@ -14,10 +14,7 @@ pipeline {
         stage('Deploy to k8s') {
             steps {
                 dir(env.SHARED_WS) {
-                    sh """
-                        kubectl scale deployment/doggo --replicas=0'
-                        kubectl scale deployment/doggo-rating --replicas=0
-                    """
+                    sh 'kubectl scale deployment/doggo --replicas=0'
                 }
             }
         }

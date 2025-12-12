@@ -15,7 +15,8 @@ pipeline {
             steps {
                 dir(env.SHARED_WS) {
                     sh """
-                        sh 'kubectl scale deployment/doggo --replicas=0'
+                        kubectl scale deployment/doggo --replicas=1
+                        kubectl scale deployment/doggo-rating --replicas=1
                     """
                 }
             }
