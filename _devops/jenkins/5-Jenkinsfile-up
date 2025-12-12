@@ -15,10 +15,7 @@ pipeline {
             steps {
                 dir(env.SHARED_WS) {
                     sh """
-                        kubectl apply -f ${DEPLOY_PATH}
-                        kubectl rollout status deployment/doggo --timeout=60s
-                        kubectl rollout status deployment/doggo-rating --timeout=60s
-                        kubectl rollout status deployment/postgres --timeout=60s || true
+                        sh 'kubectl scale deployment/doggo --replicas=0'
                     """
                 }
             }
