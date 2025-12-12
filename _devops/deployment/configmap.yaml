@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: doggo-env
+data:
+  POSTGRES_DB: "dogs"
+  POSTGRES_USER: "postgres"
+  POSTGRES_PASSWORD: "postgres"
+  POSTGRES_PORT: "5432"
+  POSTGRES_HOST: "postgres"

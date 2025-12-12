@@ -1,0 +1,16 @@
+services:
+  jenkins-docker:
+    build: .
+    user: root
+    privileged: true
+    network_mode: host
+    environment:
+      DOCKER_HOST: unix:///var/run/docker.sock
+    volumes:
+      - jenkins-data:/var/jenkins_home
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ./config.jenkins:/root/.kube/config
+      - ~/.minikube:/home/jenkins/.minikube
+
+volumes:
+  jenkins-data:
